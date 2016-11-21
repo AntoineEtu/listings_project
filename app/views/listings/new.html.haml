@@ -1,0 +1,36 @@
+.container.content
+  .row
+    .col-xs-6.col-xs-offset-3
+      %h2=t('create listing')
+  .row 
+    .col-xs-6.col-xs-offset-2.well
+    
+      = form_for @listing, class: 'form' do |f|
+        - if @listing.errors.any?
+          #error_explanation
+            %h2
+              = pluralize(listing.errors.count, "error")
+              prohibited this task from being saved:
+            %ul
+              - listing.errors.full_messages.each do |message|
+                %li= message
+        .field
+          = f.label :title
+          = f.text_field :title, class: 'form-group'
+        .field
+          = f.label :desc
+          = f.text_area :desc, class: 'form-group'
+        .field
+          = f.label :price
+          = f.text_field :price, class: 'form-group'
+        .field
+          = f.label :picture
+          = f.file_field :picture, class: 'form-group'
+        .field
+          = f.label :category_id
+          %select{name: 'listing[category_id]'}
+            - Category.all.each do |cat|
+              %option{value: cat.id}= cat.name
+        .actions
+          = f.submit class: 'btn btn-default'
+

@@ -1,0 +1,19 @@
+%p#notice= notice
+
+%h4
+  Affichage de la tache #
+  = @listing.id
+
+.row
+  .col.s12
+    .card.horizontal
+      .card-image
+        =image_tag @listing.picture, height:200
+      .card-stacked
+        .card-content
+          .card-title
+            =@listing.title
+          %p
+            = @listing.desc
+
+= link_to 'Back', listings_path, :class => 'btn grey waves-effect waves-light'

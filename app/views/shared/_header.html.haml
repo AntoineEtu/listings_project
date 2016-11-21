@@ -1,0 +1,12 @@
+.container
+  .row.top
+    .col-xs-2
+      %h1.title= link_to("Listings", root_path)
+    .col-xs-10.pull-right
+      = link_to t('create_listing'), new_listing_path, :class => 'btn btn-success pull-right'
+      = locale_select(I18n.locale)
+      - if user_signed_in?
+        = link_to t('my_account'), account_contacts_path, class: "my-account pull-right"
+        = link_to t('sign_out'), destroy_user_session_path, class: "logout pull-right", 'data-method' => 'delete'
+      - else
+        = link_to t('sign_in'), user_session_path, class: "my-account pull-right"

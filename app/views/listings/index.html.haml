@@ -1,0 +1,25 @@
+-@listings.each do |listing|
+  .row
+    .col-xs-12.listing
+      %h3=listing.title
+      %p.date
+        = l(listing.created_at)
+        %span.badge
+          /= link_to listing.category.name, listings_path(:category_id => listing.category.id)
+      .row
+        .col-xs-2
+          =image_tag listing.picture, width: 300, class: 'img-responsive'
+        .col-xs-10
+          %p
+            = listing.desc
+            .clearfix
+              %br
+          %span.price
+            =listing.price
+            €
+          - if user_signed_in?
+            = link_to t('contact'), new_user_session_path, class: 'btn btn-primary pull-right', 'data-do' => 'showContactModal', 'data-id' => listing.id, 'data-user' => current_user.id
+          - else
+            = link_to t('contact'), new_user_session_path, class: 'btn btn-primary pull-right', 'data-do' => 'showContactModal', 'data-id' => listing.id, 'data-user' => ''
+
+= render :partial => 'listings/modals/contact'
